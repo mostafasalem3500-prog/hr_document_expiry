@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- ══════════════════════════════════════════════════════════
+         90-Day Warning Template
+    ══════════════════════════════════════════════════════════ -->
+    <record id="email_template_expiry_90" model="mail.template">
+        <field name="name">Document Expiry — 90 Days Warning</field>
+        <field name="model_id" ref="model_hr_document"/>
+        <field name="subject">⚠️ Expiry Notice (90 days): {{ object.document_type_id.name }} — {{ object.name }}</field>
+        <field name="email_from">{{ (object.company_id.email or user.email or "") }}</field>
+        <field name="email_to">{{ object.responsible_id.email or object.employee_id.work_email or object.partner_id.email or "" }}</field>
+        <field name="lang">{{ object.responsible_id.lang or 'en_US' }}</field>
+        <field name="body_html" type="html">
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; direction: ltr;">
+
+  <!-- Header -->
+  <div style="background: linear-gradient(135deg, #2c7be5, #1a5bb5); padding: 24px 32px; border-radius: 8px 8px 0 0;">
+    <h1 style="color: #ffffff; margin: 0; font-size: 20px;">
+      ⚠️ Document Expiry Reminder — 90 Days
+    </h1>
+  </div>
+
+  <!-- Body -->
+  <div style="background: #f8f9fa; padding: 28px 32px; border: 1px solid #dee2e6; border-top: none;">
+    <p style="color: #495057; font-size: 15px;">Hello <strong>{{ object.responsible_id.name or 'HR Team' }}</strong>,</p>
+    <p style="color: #495057; font-size: 15px;">
+      This is a reminder that the following document will expire in approximately
+      <strong style="color: #2c7be5;">{{ object.days_remaining }} days</strong>.
+    </p>
+
+    <!-- Document Card -->
+    <div style="background: #ffffff; border: 1px solid #dee2e6; border-left: 5px solid #2c7be5; border-radius: 6px; padding: 20px; margin: 20px 0;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d; width: 40%;">Document Type:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.document_type_id.name }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Document Number:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.name }}</td>
+        </tr>
+        <tr t-if="object.employee_id">
+          <td style="padding: 6px 0; color: #6c757d;">Employee:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.employee_id.name }}</td>
+        </tr>
+        <tr t-if="object.partner_id">
+          <td style="padding: 6px 0; color: #6c757d;">Company / Person:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.partner_id.name }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Expiry Date:</td>
+          <td style="padding: 6px 0; color: #dc3545; font-weight: bold;">{{ object.expiry_date }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Days Remaining:</td>
+          <td style="padding: 6px 0;">
+            <span style="background: #2c7be5; color: #fff; padding: 2px 10px; border-radius: 12px; font-weight: bold;">
+              {{ object.days_remaining }} days
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="color: #6c757d; font-size: 14px;">
+      Please start the renewal process as soon as possible to avoid penalties or service interruptions.
+    </p>
+
+    <!-- Arabic Section -->
+    <hr style="border: none; border-top: 1px solid #dee2e6; margin: 24px 0;"/>
+    <div style="direction: rtl; text-align: right;">
+      <p style="color: #495057; font-size: 15px;">
+        تذكير: الوثيقة التالية ستنتهي خلال <strong style="color: #2c7be5;">{{ object.days_remaining }} يوم</strong>. يرجى البدء في إجراءات التجديد.
+      </p>
+      <p style="color: #6c757d; font-size: 14px;">
+        <strong>نوع الوثيقة:</strong> {{ object.document_type_id.name }}<br/>
+        <strong>رقم الوثيقة:</strong> {{ object.name }}<br/>
+        <strong>تاريخ الانتهاء:</strong> {{ object.expiry_date }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="background: #343a40; padding: 16px 32px; border-radius: 0 0 8px 8px; text-align: center;">
+    <p style="color: #adb5bd; font-size: 12px; margin: 0;">
+      This email was sent automatically by Document Expiry Notifier for Odoo.<br/>
+      أُرسل هذا البريد تلفائياً بواسطة منبّه انتهاء الوثائق.
+    </p>
+  </div>
+
+</div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════
+         60-Day Warning Template
+    ══════════════════════════════════════════════════════════ -->
+    <record id="email_template_expiry_60" model="mail.template">
+        <field name="name">Document Expiry — 60 Days Warning</field>
+        <field name="model_id" ref="model_hr_document"/>
+        <field name="subject">🔔 Expiry Notice (60 days): {{ object.document_type_id.name }} — {{ object.name }}</field>
+        <field name="email_from">{{ (object.company_id.email or user.email or "") }}</field>
+        <field name="email_to">{{ object.responsible_id.email or object.employee_id.work_email or object.partner_id.email or "" }}</field>
+        <field name="lang">{{ object.responsible_id.lang or 'en_US' }}</field>
+        <field name="body_html" type="html">
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; direction: ltr;">
+
+  <div style="background: linear-gradient(135deg, #f6a800, #d4840a); padding: 24px 32px; border-radius: 8px 8px 0 0;">
+    <h1 style="color: #ffffff; margin: 0; font-size: 20px;">
+      🔔 Document Expiry Reminder — 60 Days
+    </h1>
+  </div>
+
+  <div style="background: #f8f9fa; padding: 28px 32px; border: 1px solid #dee2e6; border-top: none;">
+    <p style="color: #495057; font-size: 15px;">Hello <strong>{{ object.responsible_id.name or 'HR Team' }}</strong>,</p>
+    <p style="color: #495057; font-size: 15px;">
+      This is an urgent reminder that the following document will expire in
+      <strong style="color: #f6a800;">{{ object.days_remaining }} days</strong>.
+      Please take action immediately.
+    </p>
+
+    <div style="background: #ffffff; border: 1px solid #dee2e6; border-left: 5px solid #f6a800; border-radius: 6px; padding: 20px; margin: 20px 0;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d; width: 40%;">Document Type:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.document_type_id.name }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Document Number:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.name }}</td>
+        </tr>
+        <tr t-if="object.employee_id">
+          <td style="padding: 6px 0; color: #6c757d;">Employee:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.employee_id.name }}</td>
+        </tr>
+        <tr t-if="object.partner_id">
+          <td style="padding: 6px 0; color: #6c757d;">Company / Person:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.partner_id.name }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Expiry Date:</td>
+          <td style="padding: 6px 0; color: #dc3545; font-weight: bold;">{{ object.expiry_date }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Days Remaining:</td>
+          <td style="padding: 6px 0;">
+            <span style="background: #f6a800; color: #fff; padding: 2px 10px; border-radius: 12px; font-weight: bold;">
+              {{ object.days_remaining }} days
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="color: #6c757d; font-size: 14px;">Immediate action is recommended to avoid compliance issues.</p>
+
+    <hr style="border: none; border-top: 1px solid #dee2e6; margin: 24px 0;"/>
+    <div style="direction: rtl; text-align: right;">
+      <p style="color: #495057; font-size: 15px;">
+        تنبيه عاجل: الوثيقة التالية ستنتهي خلال <strong style="color: #f6a800;">{{ object.days_remaining }} يوم</strong> — يرجى اتخاذ الإجراءات اللازY�ة فوراً.
+      </p>
+      <p style="color: #6c757d; font-size: 14px;">
+        <strong>نوع الوثيقة:</strong> {{ object.document_type_id.name }}<br/>
+        <strong>رقم الوثيقة:</strong> {{ object.name }}<br/>
+        <strong>تاريخ الانتهاء:</strong> {{ object.expiry_date }}
+      </p>
+    </div>
+  </div>
+
+  <div style="background: #343a40; padding: 16px 32px; border-radius: 0 0 8px 8px; text-align: center;">
+    <p style="color: #adb5bd; font-size: 12px; margin: 0;">
+      Document Expiry Notifier for Odoo | منبّه انتهاء الوثائق
+    </p>
+  </div>
+
+</div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════
+         30-Day Critical Template
+    ══════════════════════════════════════════════════════════ -->
+    <record id="email_template_expiry_30" model="mail.template">
+        <field name="name">Document Expiry — 30 Days CRITICAL</field>
+        <field name="model_id" ref="model_hr_document"/>
+        <field name="subject">🚨 URGENT — Expiry in 30 days: {{ object.document_type_id.name }} — {{ object.name }}</field>
+        <field name="email_from">{{ (object.company_id.email or user.email or "") }}</field>
+        <field name="email_to">{{ object.responsible_id.email or object.employee_id.work_email or object.partner_id.email or "" }}</field>
+        <field name="lang">{{ object.responsible_id.lang or 'en_US' }}</field>
+        <field name="body_html" type="html">
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; direction: ltr;">
+
+  <div style="background: linear-gradient(135deg, #dc3545, #a71d2a); padding: 24px 32px; border-radius: 8px 8px 0 0;">
+    <h1 style="color: #ffffff; margin: 0; font-size: 20px;">
+      🚨 URGENT — Document Expiry in 30 Days
+    </h1>
+  </div>
+
+  <div style="background: #fff5f5; padding: 28px 32px; border: 1px solid #f5c6cb; border-top: none;">
+    <p style="color: #495057; font-size: 15px;">Hello <strong>{{ object.responsible_id.name or 'HR Team' }}</strong>,</p>
+
+    <div style="background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 6px; padding: 14px 20px; margin-bottom: 20px;">
+      <strong style="color: #721c24;">⚠️ CRITICAL — Only {{ object.days_remaining }} days remaining!</strong>
+    </div>
+
+    <div style="background: #ffffff; border: 1px solid #f5c6cb; border-left: 5px solid #dc3545; border-radius: 6px; padding: 20px; margin: 20px 0;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d; width: 40%;">Document Type:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.document_type_id.name }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Document Number:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.name }}</td>
+        </tr>
+        <tr t-if="object.employee_id">
+          <td style="padding: 6px 0; color: #6c757d;">Employee:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.employee_id.name }}</td>
+        </tr>
+        <tr t-if="object.partner_id">
+          <td style="padding: 6px 0; color: #6c757d;">Company / Person:</td>
+          <td style="padding: 6px 0; color: #212529; font-weight: bold;">{{ object.partner_id.name }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Expiry Date:</td>
+          <td style="padding: 6px 0; color: #dc3545; font-size: 16px; font-weight: bold;">{{ object.expiry_date }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6c757d;">Days Remaining:</td>
+          <td style="padding: 6px 0;">
+            <span style="background: #dc3545; color: #fff; padding: 2px 10px; border-radius: 12px; font-weight: bold;">
+              {{ object.days_remaining }} days
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="color: #721c24; font-weight: bold; font-size: 14px;">
+      ⚡ Please renew this document immediately to avoid fines, penalties, or legal issues.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #f5c6cb; margin: 24px 0;"/>
+    <div style="direction: rtl; text-align: right;">
+      <div style="background: #f8d7da; border-radius: 6px; padding: 12px 16px; margin-bottom: 14px;">
+        <strong style="color: #721c24;">🚨 تنبيه حرج — لم يتبقَّ سوى {{ object.days_remaining }} يوم على انتهاء الوثيقة!</strong>
+      </div>
+      <p style="color: #495057; font-size: 15px;">
+        يرجى المسارعة في تجديد هذه الوثيقة تجنباً للغراما֪ أو العقوبات.
+      </p>
+      <p style="color: #6c757d; font-size: 14px;">
+        <strong>نوع الوثيقة:</strong> {{ object.document_type_id.name }}<br/>
+        <strong>رقم الوثيقة:</strong> {{ object.name }}<br/>
+        <strong>تاريخ الانتهاء:</strong> {{ object.expiry_date }}
+      </p>
+    </div>
+  </div>
+
+  <div style="background: #721c24; padding: 16px 32px; border-radius: 0 0 8px 8px; text-align: center;">
+    <p style="color: #f8d7da; font-size: 12px; margin: 0;">
+      Document Expiry Notifier for Odoo | منبّه انتهاء الوثائق — تنبيه حرج
+    </p>
+  </div>
+
+</div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+</odoo>
