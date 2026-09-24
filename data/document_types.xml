@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Pre-loaded Document Types — Saudi / GCC Focus
+         أنواع الوثائق الافتراضية — للسوق السعودي والخليجي
+    ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- Employee Documents | وثائق الموظفين -->
+    <record id="doc_type_iqama" model="hr.document.type">
+        <field name="name">Iqama | إقامة</field>
+        <field name="code">IQAMA</field>
+        <field name="sequence">1</field>
+        <field name="applies_to">employee</field>
+    </record>
+
+    <record id="doc_type_passport" model="hr.document.type">
+        <field name="name">Passport | جواز سفر</field>
+        <field name="code">PASSPORT</field>
+        <field name="sequence">2</field>
+        <field name="applies_to">employee</field>
+    </record>
+
+    <record id="doc_type_work_permit" model="hr.document.type">
+        <field name="name">Work Permit | تصريح عمل</field>
+        <field name="code">WORK_PERMIT</field>
+        <field name="sequence">3</field>
+        <field name="applies_to">employee</field>
+    </record>
+
+    <record id="doc_type_driving_license" model="hr.document.type">
+        <field name="name">Driving License | رخصة قيادة</field>
+        <field name="code">DRV_LICENSE</field>
+        <field name="sequence">4</field>
+        <field name="applies_to">employee</field>
+    </record>
+
+    <record id="doc_type_health_insurance" model="hr.document.type">
+        <field name="name">Health Insurance | تأمين صحي</field>
+        <field name="code">HEALTH_INS</field>
+        <field name="sequence">5</field>
+        <field name="applies_to">employee</field>
+    </record>
+
+    <record id="doc_type_medical_cert" model="hr.document.type">
+        <field name="name">Medical Certificate | شهادة طبية</field>
+        <field name="code">MED_CERT</field>
+        <field name="sequence">6</field>
+        <field name="applies_to">employee</field>
+    </record>
+
+    <record id="doc_type_national_id" model="hr.document.type">
+        <field name="name">National ID | هوية وطنية</field>
+        <field name="code">NAT_ID</field>
+        <field name="sequence">7</field>
+        <field name="applies_to">employee</field>
+    </record>
+
+    <!-- Company Documents | وثائق الشركة -->
+    <record id="doc_type_cr" model="hr.document.type">
+        <field name="name">Commercial Registration | سجل تجاري</field>
+        <field name="code">CR</field>
+        <field name="sequence">10</field>
+        <field name="applies_to">company</field>
+    </record>
+
+    <record id="doc_type_gosi" model="hr.document.type">
+        <field name="name">GOSI Certificate | شهادة التأمينات الاجتماعية</field>
+        <field name="code">GOSI</field>
+        <field name="sequence">11</field>
+        <field name="applies_to">company</field>
+    </record>
+
+    <record id="doc_type_zakat" model="hr.document.type">
+        <field name="name">Zakat / Tax Certificate | شهادة الزكاة والضريبة</field>
+        <field name="code">ZAKAT</field>
+        <field name="sequence">12</field>
+        <field name="applies_to">company</field>
+    </record>
+
+    <record id="doc_type_municipality" model="hr.document.type">
+        <field name="name">Municipality License | رخصة بلدية</field>
+        <field name="code">MUN_LIC</field>
+        <field name="sequence">13</field>
+        <field name="applies_to">company</field>
+    </record>
+
+    <record id="doc_type_chamber" model="hr.document.type">
+        <field name="name">Chamber of Commerce | غرفة التجارة</field>
+        <field name="code">CHAMBER</field>
+        <field name="sequence">14</field>
+        <field name="applies_to">company</field>
+    </record>
+
+    <record id="doc_type_lease" model="hr.document.type">
+        <field name="name">Lease / Rental Contract | عقد إيجار</field>
+        <field name="code">LEASE</field>
+        <field name="sequence">15</field>
+        <field name="applies_to">both</field>
+    </record>
+
+    <record id="doc_type_zatca" model="hr.document.type">
+        <field name="name">ZATCA / VAT Certificate | شهادة الفاتورة الإلكترومية</field>
+        <field name="code">ZATCA</field>
+        <field name="sequence">16</field>
+        <field name="applies_to">company</field>
+    </record>
+
+    <record id="doc_type_other" model="hr.document.type">
+        <field name="name">Other | أخرى</field>
+        <field name="code">OTHER</field>
+        <field name="sequence">99</field>
+        <field name="applies_to">both</field>
+    </record>
+
+</odoo>
