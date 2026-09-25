@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Document & License Expiry Notifier | منبّه انتهاء الوثائق',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'category': 'Human Resources',
     'summary': 'Track Iqama, Passport, Work Permit, Insurance & Company Licenses — auto email alerts at 90/60/30 days | تتبع انتهاء الإقامات والجوازات والتراخيص مع تنبيهات تلقائية',
     'description': """
