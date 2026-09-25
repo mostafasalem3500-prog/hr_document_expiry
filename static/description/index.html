@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: #333; }
+        .hero { background: linear-gradient(135deg, #1a5bb5, #2c7be5); padding: 40px 32px; text-align: center; }
+        .hero h1 { color: #fff; margin: 0 0 8px; font-size: 28px; }
+        .hero p  { color: #b3d1ff; margin: 0; font-size: 16px; }
+        .section { padding: 32px; max-width: 860px; margin: 0 auto; }
+        .section h2 { color: #1a5bb5; border-bottom: 2px solid #e3eeff; padding-bottom: 8px; }
+        .features { display: flex; flex-wrap: wrap; gap: 16px; }
+        .feature-card {
+            flex: 1 1 240px;
+            background: #f0f6ff;
+            border: 1px solid #cce0ff;
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+        .feature-card .icon { font-size: 28px; margin-bottom: 8px; }
+        .feature-card h3 { margin: 0 0 6px; font-size: 15px; color: #1a5bb5; }
+        .feature-card p  { margin: 0; font-size: 13px; color: #555; }
+        .doc-types { display: flex; gap: 24px; flex-wrap: wrap; }
+        .doc-col { flex: 1 1 300px; }
+        .doc-col h3 { color: #1a5bb5; margin-bottom: 10px; }
+        .doc-col ul { padding-left: 18px; line-height: 2; color: #444; }
+        .state-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        .state-table th { background: #1a5bb5; color: #fff; padding: 10px 16px; text-align: left; }
+        .state-table td { padding: 10px 16px; border-bottom: 1px solid #e3eeff; }
+        .badge { padding: 3px 12px; border-radius: 12px; font-weight: bold; font-size: 13px; }
+        .badge-green { background: #d4edda; color: #155724; }
+        .badge-yellow { background: #fff3cd; color: #856404; }
+        .badge-red { background: #f8d7da; color: #721c24; }
+        .badge-grey { background: #e2e3e5; color: #383d41; }
+        .rtl-block { direction: rtl; text-align: right; background: #f8f9fa; border-right: 4px solid #2c7be5; padding: 20px 24px; border-radius: 6px; margin-top: 24px; }
+        .rtl-block h2 { color: #1a5bb5; }
+        .rtl-block ul { padding-right: 18px; line-height: 2.2; }
+        .author-box { background: #f0f6ff; border: 1px solid #cce0ff; border-radius: 10px; padding: 20px 24px; margin-top: 24px; text-align: center; }
+        .author-box p { margin: 4px 0; color: #555; font-size: 14px; }
+        .email-preview { background: #fff; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        .email-header { padding: 14px 20px; color: #fff; font-weight: bold; }
+        .email-header.blue   { background: #2c7be5; }
+        .email-header.orange { background: #f6a800; }
+        .email-header.red    { background: #dc3545; }
+        .email-body { padding: 14px 20px; font-size: 13px; color: #555; }
+        .workflow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 16px 0; }
+        .step { background: #1a5bb5; color: #fff; border-radius: 8px; padding: 10px 18px; font-size: 13px; text-align: center; min-width: 100px; }
+        .arrow { color: #1a5bb5; font-size: 22px; margin: 0 6px; }
+        footer { background: #1a5bb5; color: #b3d1ff; text-align: center; padding: 20px; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <h1>📄 Document &amp; License Expiry Notifier</h1>
+    <p>منبّه انتهاء الوثائق والتصاريح — For Odoo 17 · 18 · 19</p>
+</div>
+
+<!-- Intro -->
+<div class="section">
+    <p style="font-size: 16px; color: #444; text-align: center; margin: 0;">
+        Never face a surprise expiration again. Track <strong>Iqama, Passport, Work Permit, Health Insurance, Commercial Registration</strong>
+        and more — with automatic email alerts at <strong>90, 60, and 30 days</strong> before they expire.
+    </p>
+</div>
+
+<!-- Features -->
+<div class="section">
+    <h2>✅ Features</h2>
+    <div class="features">
+        <div class="feature-card">
+            <div class="icon">📧</div>
+            <h3>Automatic Email Alerts</h3>
+            <p>System sends notifications at 90, 60, and 30 days before expiry — once per threshold, never spam.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🎨</div>
+            <h3>Color-Coded Status List</h3>
+            <p>Green (Valid), Yellow (Warning), Red (Critical/Expired). Know the situation at a glance.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">👤</div>
+            <h3>Employee Smart Button</h3>
+            <p>View all documents directly from the Employee card with a smart button showing count &amp; alerts.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏢</div>
+            <h3>Employee &amp; Company Docs</h3>
+            <p>Supports both employee documents (Iqama, Passport) and company documents (CR, GOSI, Zakat).</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔄</div>
+            <h3>Renewal Workflow</h3>
+            <p>Mark document as renewed — notification flags reset automatically for fresh alerts next cycle.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🌐</div>
+            <h3>Arabic RTL Support</h3>
+            <p>Full Arabic interface and bilingual email templates. Built for the Saudi &amp; GCC market.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">💬</div>
+            <h3>Chatter / History</h3>
+            <p>Every change is logged in the Odoo chatter — full audit trail for compliance.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏭</div>
+            <h3>Multi-Company</h3>
+            <p>Works with Odoo's multi-company setup. Each company manages its own documents.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Document Types -->
+<div class="section">
+    <h2>📋 Pre-loaded Document Types</h2>
+    <div class="doc-types">
+        <div class="doc-col">
+            <h3>👥 Employee Documents</h3>
+            <ul>
+                <li>Iqama | إقامة</li>
+                <li>Passport | جواز سفر</li>
+                <li>Work Permit | تصريح عمل</li>
+                <li>Driving License | رخصة قيادة</li>
+                <li>Health Insurance | تأمين صحي</li>
+                <li>Medical Certificate | شهادة طبية</li>
+                <li>National ID | هوية وطنية</li>
+            </ul>
+        </div>
+        <div class="doc-col">
+            <h3>🏢 Company Documents</h3>
+            <ul>
+                <li>Commercial Registration | سجل تجاري</li>
+                <li>GOSI Certificate | شهادة التأمينات</li>
+                <li>Zakat / Tax Certificate | شهادة الزكاة</li>
+                <li>Municipality License | رخصة بلدية</li>
+                <li>Chamber of Commerce | غرفة التجارة</li>
+                <li>ZATCA / VAT Certificate</li>
+                <li>Lease / Rental Contract | عقد إيجار</li>
+            </ul>
+        </div>
+    </div>
+    <p style="color: #666; font-size: 13px; margin-top: 8px;">
+        ✏️ You can add unlimited custom document types from the configuration menu.
+    </p>
+</div>
+
+<!-- Status Colors -->
+<div class="section">
+    <h2>🟢 Status Color System</h2>
+    <table class="state-table">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Condition</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge badge-green">✅ Valid</span></td>
+                <td>More than 90 days remaining</td>
+                <td>No action needed</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-yellow">⚠️ Warning</span></td>
+                <td>31–90 days remaining</td>
+                <td>Start renewal process — 90 &amp; 60-day alerts sent</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-red">🚨 Critical</span></td>
+                <td>1–30 days remaining</td>
+                <td>Urgent renewal — 30-day alert sent</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-grey">💀 Expired</span></td>
+                <td>Past expiry date</td>
+                <td>Immediate action required</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Email Previews -->
+<div class="section">
+    <h2>📧 Email Notification Previews</h2>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <div class="email-preview" style="flex: 1 1 240px;">
+            <div class="email-header blue">⚠️ 90-Day Warning</div>
+            <div class="email-body">
+                Subject: <em>Expiry Notice (90 days): Iqama — A123456</em><br/>
+                Body includes document details + Arabic section.
+            </div>
+        </div>
+        <div class="email-preview" style="flex: 1 1 240px;">
+            <div class="email-header orange">🔔 60-Day Warning</div>
+            <div class="email-body">
+                Subject: <em>Expiry Notice (60 days): Iqama — A123456</em><br/>
+                Urgent reminder with orange styling.
+            </div>
+        </div>
+        <div class="email-preview" style="flex: 1 1 240px;">
+            <div class="email-header red">🚨 30-Day Critical</div>
+            <div class="email-body">
+                Subject: <em>URGENT — Expiry in 30 days: Iqama — A123456</em><br/>
+                Critical red alert + Arabic translation.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How it works -->
+<div class="section">
+    <h2>⚙️ How It Works</h2>
+    <div class="workflow">
+        <div class="step">Add Document<br/><small>+ expiry date</small></div>
+        <div class="arrow">→</div>
+        <div class="step">Daily Cron<br/><small>runs at 8 AM</small></div>
+        <div class="arrow">→</div>
+        <div class="step">Checks Thresholds<br/><small>90 / 60 / 30 days</small></div>
+        <div class="arrow">→</div>
+        <div class="step">Sends Email<br/><small>to Responsible</small></div>
+        <div class="arrow">→</div>
+        <div class="step">Renew &amp; Reset<br/><small>flags for next cycle</small></div>
+    </div>
+    <ul style="color: #555; font-size: 14px; line-height: 2;">
+        <li>Each notification is sent <strong>only once</strong> per threshold — no spam</li>
+        <li>Updating the expiry date (renewal) automatically <strong>resets</strong> notification flags</li>
+        <li>HR Managers can <strong>manually trigger</strong> a notification from the form</li>
+        <li>All actions logged in the <strong>Chatter</strong> for compliance</li>
+    </ul>
+</div>
+
+<!-- Arabic Section -->
+<div class="section">
+    <div class="rtl-block">
+        <h2>📄 منبّه انتهاء الوثائق والتصاريح</h2>
+        <p>وحدة Odoo مجانية لتتبّع انتهاء صلاحية وثائق الموظفين والشركة، مع تنبيهات بريد إلكتروني تلقائية قبل <strong>90 و 60 و 30 يوماً</strong> من الانتهاء.</p>
+        <h3>الوثائق المدعومة:</h3>
+        <ul>
+            <li>إقامة — جواز سفر — تصريح عمل — رخصة قيادة — تأمين صحي — هوية وطنية</li>
+            <li>سجل تجاري — شهادة GOSI — شهادة الزكاة — رخصة بلدية — غرفة التجارة — عقد إيجار</li>
+        </ul>
+        <h3>الميزات:</h3>
+        <ul>
+            <li>✅ تنبيهات إيميل تلقائية يومياً عند 90 و 60 و 30 يوم — مرة واحدة لكل عتبة</li>
+            <li>✅ قائمة ملونة: أخضر (سارية) | أصفر (تحذير) | أحمر (حرج) | رمادي (منتهية)</li>
+            <li>✅ زر ذكي على بطاقة الموظف يعرض عدد وثائقه وتنبيهات الانتهاء</li>
+            <li>✅ تبويب "الوثائق" داخل نموذج الموظف</li>
+            <li>✅ إعادة تعيين الإشعارات تلقائياً عند تجديد الوثيقة</li>
+            <li>✅ دعم كامل للغة العربية واتجاه RTL</li>
+            <li>✅ دعم متعدد الشركات</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Author -->
+<div class="section">
+    <div class="author-box">
+        <p><strong>👨‍💻 Developed by: Mostafa Salem</strong></p>
+        <p>Data Analyst &amp; Odoo Developer | مطوّر Odoo ومحلل بيانات</p>
+        <p>Makkah Al-Mukarramah, Saudi Arabia</p>
+        <p>🇸🇦 Built for the Saudi &amp; GCC Market | مصمّم للسوق السعودي والخليجي</p>
+    </div>
+</div>
+
+<footer>
+    Document &amp; License Expiry Notifier for Odoo 17 · 18 · 19
+    | منبّه انتهاء الوثائق والتصاريح
+    | License: LGPL-3 | FREE
+</footer>
+
+</body>
+</html>
