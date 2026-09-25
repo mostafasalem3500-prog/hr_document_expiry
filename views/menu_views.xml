@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_hr_document_root"
+              name="Documents | الوثائق"
+              parent="hr.menu_hr_root"
+              sequence="20"/>
+
+    <menuitem id="menu_hr_document_all"
+              name="All Documents | جميع الوثائق"
+              parent="menu_hr_document_root"
+              action="action_hr_document"
+              sequence="10"/>
+
+    <menuitem id="menu_hr_document_alerts"
+              name="Alerts | التنبيهات"
+              parent="menu_hr_document_root"
+              action="action_hr_document_alerts"
+              sequence="20"/>
+
+    <menuitem id="menu_hr_document_types"
+              name="Document Types | أنواع الوثائق"
+              parent="menu_hr_document_root"
+              action="action_hr_document_type"
+              sequence="50"
+              groups="hr.group_hr_manager"/>
+
+</odoo>

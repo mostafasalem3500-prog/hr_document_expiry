@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Smart button on Employee form -->
+    <record id="view_employee_document_smart_button" model="ir.ui.view">
+        <field name="name">hr.employee.document.button</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_employee_documents"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        invisible="doc_total_count == 0">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="doc_total_count"/>
+                        </span>
+                        <span class="o_stat_text">Documents</span>
+                    </div>
+                </button>
+                <!-- Alert badge if any document needs attention -->
+                <button name="action_view_employee_documents"
+                        type="object"
+                        class="oe_stat_button btn-danger"
+                        icon="fa-exclamation-circle"
+                        invisible="doc_alert_count == 0">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="doc_alert_count"/>
+                        </span>
+                        <span class="o_stat_text">Expiring!</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Documents tab in Employee form -->
+    <record id="view_employee_document_tab" model="ir.ui.view">
+        <field name="name">hr.employee.document.tab</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Documents | الوثائق" name="documents_tab">
+                    <field name="document_ids"
+                           context="{'default_employee_id': id, 'default_entity_type': 'employee'}">
+                        <list string="Documents"
+                              decoration-danger="state in ('expired','critical')"
+                              decoration-warning="state == 'warning'"
+                              decoration-success="state == 'valid'">
+                            <field name="document_type_id"/>
+                            <field name="name" string="Document #"/>
+                            <field name="expiry_date"/>
+                            <field name="days_remaining"/>
+                            <field name="state" widget="badge"
+                                   decoration-danger="state in ('expired','critical')"
+                                   decoration-warning="state == 'warning'"
+                                   decoration-success="state == 'valid'"/>
+                        </list>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

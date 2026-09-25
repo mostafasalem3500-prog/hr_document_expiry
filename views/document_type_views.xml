@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hr_document_type_list" model="ir.ui.view">
+        <field name="name">hr.document.type.list</field>
+        <field name="model">hr.document.type</field>
+        <field name="arch" type="xml">
+            <list string="Document Types" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="applies_to"/>
+                <field name="active" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_document_type_form" model="ir.ui.view">
+        <field name="name">hr.document.type.form</field>
+        <field name="model">hr.document.type</field>
+        <field name="arch" type="xml">
+            <form string="Document Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="applies_to"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Note | ملاحظة">
+                        <field name="note" nolabel="1" placeholder="Internal notes about this document type..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_document_type" model="ir.actions.act_window">
+        <field name="name">Document Types | أنواع الوثائق</field>
+        <field name="res_model">hr.document.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
