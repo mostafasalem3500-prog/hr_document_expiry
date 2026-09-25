@@ -29,7 +29,7 @@ class HrEmployee(models.Model):
     def action_open_documents(self):
         self.ensure_one()
         action = self.env['ir.actions.act_window']._for_xml_id(
-            'hr_document_expiry.action_hr_document')
+            'hr_document_expiry_notifier.action_hr_document')
         action.update({
             'name': _('Documents of %s', self.name),
             'domain': [('employee_id', '=', self.id)],

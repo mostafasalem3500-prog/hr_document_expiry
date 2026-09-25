@@ -12,7 +12,7 @@ and e-mails reminders automatically **90, 60 and 30 days** before they expire.
 - HR-only access and multi-company rules
 
 ## Installation
-1. Copy the `hr_document_expiry` folder into your addons path.
+1. Copy the `hr_document_expiry_notifier` folder into your addons path.
 2. Update the Apps list and install **Document & License Expiry Notifier**.
 3. Configure an outgoing mail server so reminders can be delivered.
 

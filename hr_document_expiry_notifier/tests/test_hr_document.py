@@ -14,7 +14,7 @@ class TestHrDocumentExpiry(TransactionCase):
         cls.env.company.email = 'hr@example.com'
         cls.today = fields.Date.today()
         cls.employee = cls.env['hr.employee'].create({'name': 'Test Employee'})
-        cls.doc_type = cls.env.ref('hr_document_expiry.doc_type_iqama')
+        cls.doc_type = cls.env.ref('hr_document_expiry_notifier.doc_type_iqama')
 
     def _doc(self, days, number):
         return self.env['hr.document'].create({

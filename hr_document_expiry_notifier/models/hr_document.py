@@ -228,7 +228,7 @@ class HrDocument(models.Model):
     def _send_expiry_notice(self, threshold):
         self.ensure_one()
         template = self.env.ref(
-            'hr_document_expiry.email_template_expiry_%s' % threshold,
+            'hr_document_expiry_notifier.email_template_expiry_%s' % threshold,
             raise_if_not_found=False,
         )
         if template:
