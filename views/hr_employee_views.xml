@@ -22,4 +22,32 @@
             </div>
         </field>
     </record>
+    <record id="view_employee_form_documents_tab" model="ir.ui.view">
+        <field name="name">hr.employee.form.document.expiry.tab</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Documents | الوثائق" name="documents_tab" groups="hr.group_hr_user">
+                    <field name="document_ids"
+                           context="{'default_employee_id': id, 'default_owner_type': 'employee', 'default_company_id': company_id}">
+                        <list decoration-success="state == 'valid'"
+                              decoration-warning="state == 'warning'"
+                              decoration-danger="state == 'critical'"
+                              decoration-muted="state == 'expired'">
+                            <field name="document_type_id"/>
+                            <field name="name"/>
+                            <field name="expiry_date"/>
+                            <field name="days_remaining"/>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'valid'"
+                                   decoration-warning="state == 'warning'"
+                                   decoration-danger="state == 'critical'"
+                                   decoration-muted="state == 'expired'"/>
+                        </list>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
 </odoo>
