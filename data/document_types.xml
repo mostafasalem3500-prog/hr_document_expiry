@@ -100,7 +100,7 @@
     </record>
 
     <record id="doc_type_zatca" model="hr.document.type">
-        <field name="name">ZATCA / VAT Certificate | شهادة الفاتورة الإلكترومية</field>
+        <field name="name">ZATCA / VAT Certificate | شهادة ضريبة القيمة المضافة</field>
         <field name="code">ZATCA</field>
         <field name="sequence">16</field>
         <field name="applies_to">company</field>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_document_type_list" model="ir.ui.view">
+        <field name="name">hr.document.type.list</field>
+        <field name="model">hr.document.type</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="applies_to"/>
+                <field name="note" optional="hide"/>
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_document_type_search" model="ir.ui.view">
+        <field name="name">hr.document.type.search</field>
+        <field name="model">hr.document.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <filter name="archived" string="Archived | مؤرشف" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_applies" string="Applies To" context="{'group_by': 'applies_to'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_document_type" model="ir.actions.act_window">
+        <field name="name">Document Types | أنواع الوثائق</field>
+        <field name="res_model">hr.document.type</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

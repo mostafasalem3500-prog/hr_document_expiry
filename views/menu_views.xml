@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hr_document_root"
+              name="Document Expiry | انتهاء الوثائق"
+              parent="hr.menu_hr_root"
+              groups="hr.group_hr_user"
+              sequence="45"/>
+
+    <menuitem id="menu_hr_document"
+              name="All Documents | كل الوثائق"
+              parent="menu_hr_document_root"
+              action="action_hr_document"
+              sequence="10"/>
+
+    <menuitem id="menu_hr_document_attention"
+              name="Needs Action | تحتاج إجراء"
+              parent="menu_hr_document_root"
+              action="action_hr_document_attention"
+              sequence="20"/>
+
+    <menuitem id="menu_hr_document_type"
+              name="Document Types | أنواع الوثائق"
+              parent="hr.menu_config_employee"
+              action="action_hr_document_type"
+              groups="hr.group_hr_manager"
+              sequence="40"/>
+</odoo>

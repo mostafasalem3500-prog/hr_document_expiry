@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List -->
+    <record id="view_hr_document_list" model="ir.ui.view">
+        <field name="name">hr.document.list</field>
+        <field name="model">hr.document</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'valid'"
+                  decoration-warning="state == 'warning'"
+                  decoration-danger="state == 'critical'"
+                  decoration-muted="state == 'expired'"
+                  multi_edit="1">
+                <field name="document_type_id"/>
+                <field name="name"/>
+                <field name="owner_type" optional="hide"/>
+                <field name="employee_id" widget="many2one_avatar_employee"/>
+                <field name="issue_date" optional="hide"/>
+                <field name="expiry_date"/>
+                <field name="days_remaining"/>
+                <field name="responsible_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'valid'"
+                       decoration-warning="state == 'warning'"
+                       decoration-danger="state == 'critical'"
+                       decoration-muted="state == 'expired'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Kanban -->
+    <record id="view_hr_document_kanban" model="ir.ui.view">
+        <field name="name">hr.document.kanban</field>
+        <field name="model">hr.document</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" group_create="false" group_delete="false"
+                    group_edit="false" records_draggable="false" class="o_kanban_small_column">
+                <field name="color"/>
+                <field name="state"/>
+                <progressbar field="state"
+                             colors='{"valid": "success", "warning": "warning", "critical": "danger", "expired": "muted"}'/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="document_type_id" class="fw-bold"/>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'valid'"
+                                   decoration-warning="state == 'warning'"
+                                   decoration-danger="state == 'critical'"
+                                   decoration-muted="state == 'expired'"/>
+                        </div>
+                        <field name="name" class="text-muted"/>
+                        <field name="employee_id" invisible="not employee_id"/>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span><i class="fa fa-calendar-times-o me-1" title="Expiry"/><field name="expiry_date"/></span>
+                            <span><field name="days_remaining"/> d</span>
+                        </div>
+                        <footer>
+                            <field name="activity_ids" widget="kanban_activity"/>
+                            <field name="responsible_id" widget="many2one_avatar_user" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_hr_document_form" model="ir.ui.view">
+        <field name="name">hr.document.form</field>
+        <field name="model">hr.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_send_reminder" type="object"
+                            string="Send Reminder Now | إرسال تذكير"
+                            invisible="state == 'expired' or not id"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Expired | منتهية" bg_color="text-bg-danger"
+                            invisible="state != 'expired'"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-secondary"
+                            invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. 2345678901"/></h1>
+                    </div>
+                    <group>
+                        <group string="Document | الوثيقة">
+                            <field name="document_type_id" options="{'no_create': True}"/>
+                            <field name="owner_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="employee_id" invisible="owner_type != 'employee'"
+                                   required="owner_type == 'employee'"/>
+                            <field name="partner_id"/>
+                            <field name="issuing_authority"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Validity | الصلاحية">
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                            <field name="days_remaining" decoration-danger="days_remaining &lt;= 30"
+                                   decoration-warning="days_remaining &gt; 30 and days_remaining &lt;= 90"/>
+                            <field name="responsible_id" widget="many2one_avatar_user"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Attachments | المرفقات" name="attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                        <page string="Notifications | التنبيهات" name="notifications">
+                            <group>
+                                <field name="notified_90"/>
+                                <field name="notified_60"/>
+                                <field name="notified_30"/>
+                            </group>
+                            <div class="text-muted">
+                                Reminders are e-mailed automatically 90, 60 and 30 days before expiry.
+                                Changing the expiry date (renewal) resets them.
+                                <br/>
+                                تُرسل التذكيرات تلقائياً قبل الانتهاء بـ 90 و60 و30 يوماً، وتُعاد عند تغيير تاريخ الانتهاء (التجديد).
+                            </div>
+                        </page>
+                        <page string="Notes | ملاحظات" name="notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Calendar -->
+    <record id="view_hr_document_calendar" model="ir.ui.view">
+        <field name="name">hr.document.calendar</field>
+        <field name="model">hr.document</field>
+        <field name="arch" type="xml">
+            <calendar date_start="expiry_date" color="state" mode="month" quick_create="0">
+                <field name="document_type_id"/>
+                <field name="employee_id"/>
+                <field name="state" filters="1"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Pivot / Graph -->
+    <record id="view_hr_document_pivot" model="ir.ui.view">
+        <field name="name">hr.document.pivot</field>
+        <field name="model">hr.document</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="document_type_id" type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_hr_document_graph" model="ir.ui.view">
+        <field name="name">hr.document.graph</field>
+        <field name="model">hr.document</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="1">
+                <field name="document_type_id"/>
+                <field name="state"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_hr_document_search" model="ir.ui.view">
+        <field name="name">hr.document.search</field>
+        <field name="model">hr.document</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="document_type_id"/>
+                <field name="employee_id"/>
+                <field name="responsible_id"/>
+                <filter name="needs_action" string="Needs Action | تحتاج إجراء"
+                        domain="[('state', 'in', ('critical', 'expired'))]"/>
+                <separator/>
+                <filter name="expiring_30" string="Expiring in 30 days"
+                        domain="[('days_remaining', '&lt;=', 30), ('days_remaining', '&gt;=', 0)]"/>
+                <filter name="expiring_60" string="Expiring in 60 days"
+                        domain="[('days_remaining', '&lt;=', 60), ('days_remaining', '&gt;=', 0)]"/>
+                <filter name="expiring_90" string="Expiring in 90 days"
+                        domain="[('days_remaining', '&lt;=', 90), ('days_remaining', '&gt;=', 0)]"/>
+                <filter name="expired" string="Expired | منتهية" domain="[('state', '=', 'expired')]"/>
+                <separator/>
+                <filter name="employee_docs" string="Employee Documents" domain="[('owner_type', '=', 'employee')]"/>
+                <filter name="company_docs" string="Company Documents" domain="[('owner_type', '=', 'company')]"/>
+                <separator/>
+                <filter name="my_docs" string="My Responsibility" domain="[('responsible_id', '=', uid)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_type" string="Document Type" context="{'group_by': 'document_type_id'}"/>
+                    <filter name="group_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_month" string="Expiry Month" context="{'group_by': 'expiry_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_hr_document" model="ir.actions.act_window">
+        <field name="name">Documents | الوثائق</field>
+        <field name="res_model">hr.document</field>
+        <field name="view_mode">list,kanban,form,calendar,pivot,graph</field>
+        <field name="search_view_id" ref="view_hr_document_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add your first document | أضف أول وثيقة</p>
+            <p>Record iqamas, passports, licenses and company certificates with their expiry dates —
+               reminders will be e-mailed automatically before they expire.</p>
+        </field>
+    </record>
+
+    <record id="action_hr_document_attention" model="ir.actions.act_window">
+        <field name="name">Needs Action | تحتاج إجراء</field>
+        <field name="res_model">hr.document</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_hr_document_search"/>
+        <field name="context">{'search_default_needs_action': 1}</field>
+    </record>
+</odoo>
